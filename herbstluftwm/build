@@ -1,0 +1,10 @@
+#!/bin/sh -e
+
+
+CMAKE_INSTALL_PREFIX=/usr/
+CMAKE_INSTALL_SYSCONF_PREFIX="$1/etc/"
+
+make
+
+cd build
+make DESTDIR="$1" install
