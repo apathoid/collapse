@@ -1,0 +1,10 @@
+#!/bin/sh -e
+
+
+mkdir json-c-build
+cd json-c-build
+
+cmake -DCMAKE_INSTALL_PREFIX=/usr ..
+make
+
+make DESTDIR="$1" PREFIX=/usr install
