@@ -1,0 +1,38 @@
+--- Makefile
++++ Makefile.patch
+@@ -1,17 +1,24 @@
+-all: xkblayout-state
++PROG=xkblayout-state
++ 
++SRC = wrapper.cpp XKeyboard.cpp
++OBJS = ${SRC:.cpp=.o}
++ 
++all: ${PROG}
++ 
++.cpp.o:
++	${CXX} -c ${CXXFLAGS} $<
+ 
+-XKeyboard.o: XKeyboard.cpp XKeyboard.h X11Exception.h
+-	g++ -c -Wall -O2 XKeyboard.cpp -o XKeyboard.o
+-
+-wrapper.o: wrapper.cpp XKeyboard.h
+-	g++ -c -Wall -O2 wrapper.cpp -o wrapper.o
+-
+-xkblayout-state: XKeyboard.o wrapper.o
+-	g++ XKeyboard.o wrapper.o -lX11 -o xkblayout-state
+-
+-clean: 
++${PROG}: ${OBJS}
++	${CXX} -o $@ ${OBJS} ${LDFLAGS} -lX11
++ 
++ clean: 
+ 	rm -f xkblayout-state XKeyboard.o wrapper.o
++	rm -f ${PROG} ${OBJS}
+ 
+ dist:
+ 	tar cfa xkblayout-state-v1b.tar.gz Makefile README.md wrapper.cpp X11Exception.h XKeyboard.cpp XKeyboard.h
++
++install:
++	install -Dm755 ${PROG} ${DESTDIR}/usr/bin/${PROG}
++
+ 
