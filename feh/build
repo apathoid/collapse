@@ -1,0 +1,4 @@
+#!/bin/sh -e
+
+make DESTDIR="$1" PREFIX=/usr exif=1 help=1 inotify=1 xinerama=1
+make DESTDIR="$1" PREFIX=/usr install
