@@ -1,0 +1,7 @@
+#!/bin/sh -e
+
+
+./configure --enable-iproute2 --disable-plugin-auth-pam
+
+make
+make DESTDIR="$1" PREFIX=/usr install
