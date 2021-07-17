@@ -1,0 +1,30 @@
+#!/bin/sh -e
+
+
+export DESTDIR="$1"
+
+pkgname="docbook-xml"
+versions="4.2 4.3 4.4"
+ver=""
+dir="${DESTDIR}/usr/share/xml/docbook/4.5"
+
+mkdir -p ${dir}
+install -d -m755 ${dir}
+cp -r ./* ${dir}
+mv catalog.xml ${dir}/catalog
+
+for ver in ${versions}; do
+	dir=${DESTDIR}/usr/share/xml/docbook/${ver}
+	mkdir -p ${dir}
+	install -d -m755 ${dir}
+	unzip -o ${pkgname}-${ver}.zip \
+		-d ${dir} && mv ${dir}/catalog.xml ${dir}/catalog
+done
+
+echo "TESTEES $(ls ${DESTDIR}/usr/share/xml/docbook/4.5)"
+echo $(ls)
+
+dir=${DESTDIR}/usr/share/xml/docbook/4.2
+sed -e 's|V4.2|V4.1.2|g' < ${dir}/catalog > ${dir}/catalog-4.1.2
+chmod 644 ${dir}/catalog-4.1.2
+sed -n '/Copyright/,/maintenance/p' ${DESTDIR}/usr/share/xml/docbook/4.5/dbhierx.mod > LICENSE
