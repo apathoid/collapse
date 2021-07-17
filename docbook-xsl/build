@@ -1,0 +1,25 @@
+#!/bin/sh -e
+
+
+export DESTDIR="$1"
+
+xslmods="assembly common eclipse epub epub3 fo highlighting html \
+		htmlhelp images javahelp lib manpages params profiling \
+		roundtrip template slides website xhtml xhtml-1_1 xhtml5"
+
+dir="$1/usr/share/xsl/docbook"
+mkdir -p ${dir}
+
+cd docbook-xsl-nons-snapshot
+chmod 644 catalog.xml
+chmod 644 VERSION
+chmod 644 VERSION.xsl
+
+cp catalog.xml ${dir}
+cp VERSION ${dir}
+cp VERSION.xsl ${dir}
+
+for dir in ${xslmods}; do
+	mkdir -p "$1/usr/share/xsl/docbook/${dir}"
+	cp -a ${dir}/* ${DESTDIR}/usr/share/xsl/docbook/${dir}/
+done
