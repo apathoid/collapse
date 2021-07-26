@@ -1,0 +1,8 @@
+cairo
+dbus
+glib
+libXinerama
+libXrandr
+libXScrnSaver
+libnotify
+pango

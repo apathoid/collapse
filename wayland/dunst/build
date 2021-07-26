@@ -1,0 +1,4 @@
+#!/bin/sh -e
+
+make WAYLAND=1 DESTDIR="$1" PREFIX=/usr MANDIR=/usr/share
+make WAYLAND=1 DESTDIR="$1" PREFIX=/usr MANDIR=/usr/share install

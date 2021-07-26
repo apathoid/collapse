@@ -1,0 +1,28 @@
+#!/bin/sh -e
+
+patch -p1 < rootless_modesetting.patch
+patch -p1 < fix-crash.patch
+
+./configure \
+    --prefix=/usr \
+    --localstatedir=/var \
+    --disable-systemd-logind \
+    --disable-unit-tests \
+    --disable-xvfb \
+    --disable-xnest \
+    --disable-xquartz \
+    --disable-xwin \
+    --enable-glamor \
+    --enable-glx \
+    --enable-dri \
+    --enable-dri2 \
+    --enable-dri3 \
+    --enable-xorg \
+    --enable-xwayland \
+    --with-sha1=libcrypto \
+    --with-systemd-daemon=off
+
+make
+make DESTDIR="$1" install
+
+#    --enable-glvnd \

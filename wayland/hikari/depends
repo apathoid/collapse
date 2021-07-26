@@ -1,0 +1,10 @@
+bmake
+wayland
+wlroots
+pango
+cairo
+libinput
+libxkbcommon
+pam
+pixman
+libucl
