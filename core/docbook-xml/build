@@ -21,7 +21,6 @@ for ver in ${versions}; do
 		-d ${dir} && mv ${dir}/catalog.xml ${dir}/catalog
 done
 
-echo "TESTEES $(ls ${DESTDIR}/usr/share/xml/docbook/4.5)"
 echo $(ls)
 
 dir=${DESTDIR}/usr/share/xml/docbook/4.2
