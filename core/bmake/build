@@ -1,0 +1,8 @@
+#!/bin/sh -e
+
+
+sed -i 's/op_test() {/& return 0;/' boot-strap
+sed -i '1s,:,#!/bin/sh,g' install-sh
+
+./boot-strap --prefix=/usr op=build
+./boot-strap --prefix=/usr --install-destdir="$1" op=install
