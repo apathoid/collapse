@@ -9,4 +9,11 @@ bmake \
 	WITH_LAYERSHELL=YES \
 	ETC_PREFIX= \
 
+
+mkdir -p $1/etc/hikari
+mkdir -p $1/etc/pam.d
+
+cp etc/hikari/* $1/etc/hikari
+cp etc/pam.d/hikari-unlocker.Linux $1/etc/pam.d/hikari-unlocker
+
 bmake PREFIX=/usr install
