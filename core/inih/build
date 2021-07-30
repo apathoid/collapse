@@ -1,0 +1,7 @@
+#!/bin/sh -e
+
+
+meson --prefix=/usr build
+
+meson compile -C build
+meson install -C build
